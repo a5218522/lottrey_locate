@@ -28,6 +28,11 @@ public class JwtHelper {
         key = Keys.hmacShaKeyFor(tokenSignKey.getBytes());
     }
 
+    /**
+     * 输入userId生成token
+     * @param userId
+     * @return
+     */
     public String createToken(Long userId) {
         return Jwts.builder()
                 .header()
@@ -42,7 +47,11 @@ public class JwtHelper {
                 .compact();
     }
 
-
+    /**
+     * 检验token是否过期
+     * @param token
+     * @return
+     */
     public boolean isExpiration(String token) {
         try {
             return Jwts
@@ -58,6 +67,11 @@ public class JwtHelper {
         }
     }
 
+    /**
+     * 通过token返回用户id
+     * @param token
+     * @return
+     */
     public Long getUserId(String token) {
         if (StringUtils.isEmpty(token)) return null;
         Integer userId = (Integer) Jwts
